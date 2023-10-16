@@ -16,7 +16,8 @@ const app = express();
 
 app.use(
   cors({
-    origin: "https://frontend-qhl0.onrender.com"
+    origin: "https://frontend-qhl0.onrender.com",
+    methods: ["GET", "POST", "PATCH", "DELETE"]
   })
 );
 
