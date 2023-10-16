@@ -27,9 +27,8 @@ app.use((requete, reponse, next) =>{
   reponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
   reponse.header('Access-Control-Allow-Credentials', true);
 
-
-  if (req.method === 'OPTIONS') {
-    return res.status(204).end();
+  if (requete.method === 'OPTIONS') {
+    return reponse.status(204).end();
   }
 
   next();
