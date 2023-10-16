@@ -41,7 +41,7 @@ app.use((error, requete, reponse, next) => {
 });
 
 mongoose
-.connect(`mongodb+srv://diegolucasjay:elbN2ZioU5TLqaaZ@cluster0.f6f9zcc.mongodb.net/`)
+.connect(`mongodb://127.0.0.1:27017`)
 .then(() => {
     app.listen(5000)
     console.log("Connexion à la base de données réussie");
