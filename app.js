@@ -1,7 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
+
+app.use(
+  cors({
+    origin: "https://frontend-qhl0.onrender.com"
+  })
+);
 
 const etudiantRoutes = require("./routes/etudiant-routes");
 const employeurRoutes = require("./routes/employeur-routes");
