@@ -15,9 +15,16 @@ const app = express();
 app.use(bodyParser.json());
 
 app.use((requete, reponse, next) =>{
-  reponse.setHeader("Access-Control-Allow-Origin", "*");
+  reponse.setHeader("Access-Control-Allow-Origin", "https://frontend-qhl0.onrender.com");
   reponse.setHeader("Access-Control-Allow-Headers", "*");
   reponse.setHeader("Access-Control-Allow-Methods", "GET, POST, PATCH, DELETE");
+  reponse.header('Access-Control-Allow-Credentials', true);
+
+
+  if (req.method === 'OPTIONS') {
+    return res.status(204).end();
+  }
+
   next();
 })
 
