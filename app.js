@@ -4,11 +4,6 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 mongoose.set('strictQuery', true);
 
-app.use(
-  cors({
-    origin: "https://frontend-qhl0.onrender.com"
-  })
-);
 
 const etudiantRoutes = require("./routes/etudiant-routes");
 const employeurRoutes = require("./routes/employeur-routes");
@@ -18,6 +13,12 @@ const stageRoutes = require("./routes/stage-routes")
 const HttpErreur = require("./models/http-erreur");
 
 const app = express();
+
+app.use(
+  cors({
+    origin: "https://frontend-qhl0.onrender.com"
+  })
+);
 
 app.use(bodyParser.json());
 
