@@ -10,7 +10,6 @@ const Etudiant = require("../models/etudiant");
 const getEtudiantById = async (requete, reponse, next) => {
   const etudiantId = requete.params.etudiantId;
   let etudiant;
-  console.log("get");
   try {
     etudiant = await Etudiant.findById(etudiantId);
   } catch (err) {
@@ -33,7 +32,7 @@ const getEtudiantById = async (requete, reponse, next) => {
 
 
 const updateEtudiant = async (requete, reponse, next) => {
-  const { nom, email, motdepasse, numTel} = requete.body;
+  const { nom, email, motdepasse, numTel,addressEtu} = requete.body;
   const etudiantId = requete.params.etudiantId;
 
   let etudiant;
@@ -44,6 +43,7 @@ const updateEtudiant = async (requete, reponse, next) => {
     etudiant.email = email;
     etudiant.motdepasse = motdepasse;
     etudiant.numTel = numTel;
+    etudiant.addressEtu=addressEtu;
     await etudiant.save();
   } catch {
     return next(
@@ -79,7 +79,7 @@ const supprimerEtudiant = async (requete, reponse, next) => {
 };
 
 const inscription = async (requete, reponse, next) => {
-  const { nom, email, motdepasse, numTel, userType } = requete.body;
+  const { nom, email, motdepasse, numTel, userType,addressEtu } = requete.body;
 
 
 
@@ -100,7 +100,8 @@ const inscription = async (requete, reponse, next) => {
     email,
     numTel,
     motdepasse,
-    userType
+    userType,
+    addressEtu
   });
   try {
     await nouveauEtudiant.save();

@@ -9,7 +9,8 @@ const etudiantSchema = new Schema({
     email:{type: String, required: true},
     motdepasse:{type: String, required: true},
     numTel:{type: String,required: true},
-    userType:{type: String,required: true}
+    userType:{type: String,required: true},
+    addressEtu:{type: String,required: true}
 
 });
 
