@@ -72,7 +72,7 @@ const updateEmployeur = async (requete, reponse, next) => {
   let employeur;
 
   try {
-    employeur = await employeur.findById(employeurId);
+    employeur = await Employeur.findById(employeurId);
     employeur.nom = nom;
     employeur.nomEntreprise = nomEntreprise;
     employeur.adresseEntreprise = adresseEntreprise;

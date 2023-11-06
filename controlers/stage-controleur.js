@@ -6,6 +6,8 @@ const HttpErreur = require("../models/http-erreur");
 
 const Stage = require("../models/stage");
 
+const Etudiant = require("../models/etudiant");
+
 const getStages = async (requete, reponse, next) => {
   let stages;
 
@@ -80,7 +82,8 @@ const creerStage = async (requete, reponse, next) => {
     descriptionStage,
     remuneration,
     createur,
-    etudiants:[]
+    etudiants:[],
+    dateEtudiants:[]
   });
 
 
@@ -145,6 +148,65 @@ const supprimerStage = async (requete, reponse, next) => {
   reponse.status(200).json({ message: "stage supprimée" });
 };
 
+const postulerAuStage = async (requete, reponse, next) => {
+  const { etudiantId, date} = requete.body;
+  const stageId = requete.params.stageId;
+
+  try {
+    const etudiant = await Etudiant.findById(etudiantId);
+
+    if (!etudiant) {
+      return next(new HttpErreur("L'étudiant n'existe pas.", 404));
+    }
+    const stage = await Stage.findById(stageId);
+
+    if (!stage) {
+      return next(new HttpErreur("Le stage n'existe pas.", 404));
+    }
+    if (stage.etudiants.includes(etudiantId)) {
+      return next(new HttpErreur("L'étudiant a déjà postulé à ce stage.", 400));
+    }
+
+    stage.etudiants.push(etudiant);
+    stage.dateEtudiants.push(date);
+
+
+
+    await stage.save();
+
+    console.log(stage.dateEtudiants);
+ 
+    reponse.status(200).json({ message: "L'étudiant a postulé avec succès au stage." });
+  } catch (err) {
+    return next(new HttpErreur("Une erreur s'est produite lors de la postulation au stage.", 500));
+  }
+};
+
+const getEtudiantsStages = async (requete, reponse, next) => {
+  const stageId = requete.params.stageId;
+  let etudiants = [];
+
+  try {
+    const stage = await Stage.findById(stageId);
+    if (!stage) {
+      return next(new HttpErreur("Stage not found", 404));
+    }
+    etudiants = stage.etudiants;
+  } catch {
+    return next(new HttpErreur("Erreur accès liste etudiants"), 500);
+  }
+  
+  reponse.json({
+    etudiants
+  });
+};
+
+
+
+
+
+exports.getEtudiantsStages = getEtudiantsStages;
+exports.postulerAuStage = postulerAuStage;
 exports.getStageById = getStageById;
 exports.creerStage = creerStage;
 exports.updateStage = updateStage;

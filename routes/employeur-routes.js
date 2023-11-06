@@ -3,7 +3,7 @@ const express = require("express");
 const controleurEmployeur = require("../controlers/employeur-controleur");
 const router = express.Router();
 
-router.get("/:employeurId/",controleurEmployeur.getEmployeurById);
+router.get("/:employeurId",controleurEmployeur.getEmployeurById);
 
 router.post("/creerEmployeur",controleurEmployeur.creerEmployeur);
 

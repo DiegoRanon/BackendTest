@@ -13,7 +13,8 @@ const schemaStage = new Schema({
     descriptionStage:{type: String, required: true},
     remuneration:{type: String, required: true},
     createur:{type: mongoose.Types.ObjectId, required: true, ref:"Employeur"},
-    etudiants:[{type: mongoose.Types.ObjectId, required: true, ref:"Etudiant"}]
+    etudiants:[{type: mongoose.Types.ObjectId, required: true, ref:"Etudiant"}],
+    dateEtudiants:[{type: String, required: true}]
 
 });
 
