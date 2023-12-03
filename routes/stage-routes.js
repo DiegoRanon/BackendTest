@@ -19,5 +19,7 @@ router.patch('/:stageId', controleursStage.updateStage);
 
 router.delete('/:stageId', controleursStage.supprimerStage);
 
+router.post('/appliquerStatut/:stageId', controleursStage.appliquerStatut);
+
 
 module.exports = router;
